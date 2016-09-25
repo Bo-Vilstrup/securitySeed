@@ -53,13 +53,22 @@ app.set('port', port);
 
 with:
 
-var port = normalizePort(process.env.OPENSHIFT_NODEJS_PORT || '3000');
+var config = require('cloud-env');
+
+var port = config.PORT;
 app.set('port', port);
-var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var ip = config.IP;
 app.set('ip', ip);
 
 Now localize the line that starts the server : server.listen(port); and replace it with this:
 server.listen(port, ip);
 
+
+#### change server.js
+
+npm install cors --save
+
+var cors = require('cors');
+app.use(cors());
 
 

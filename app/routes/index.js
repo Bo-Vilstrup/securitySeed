@@ -3,9 +3,17 @@ var router = express.Router();
 
 var config = require('cloud-env');
 
+var environment = [
+  "port: " + config.PORT,
+  "ip: " +config.IP
+];
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express :: edit by Bo 1 : ' + config.PORT +' ' +config.IP });
+  res.render('index', {
+                      title: 'Express',
+                      env : environment
+  });
 });
 
 module.exports = router;
