@@ -44,3 +44,22 @@ Changed to:
     
     
     "test": "node_modules/.bin/mocha -w"
+
+#### Change bin/www
+
+Open the bin\www file and replace these lines:
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+with:
+
+var port = normalizePort(process.env.OPENSHIFT_NODEJS_PORT || '3000');
+app.set('port', port);
+var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+app.set('ip', ip);
+
+Now localize the line that starts the server : server.listen(port); and replace it with this:
+server.listen(port, ip);
+
+
+
