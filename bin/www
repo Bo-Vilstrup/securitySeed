@@ -86,14 +86,17 @@ db.connect(connection_string,function(err){
 
 
 
+//
+//
+//
+// //server.listen(port);
+// server.listen(port, ip);
+// console.log("Listening on "+ip+", port "+port);
+// server.on('error', onError);
+// server.on('listening', onListening);
+//
+//
 
-
-
-//server.listen(port);
-server.listen(port, ip);
-console.log("Listening on "+ip+", port "+port);
-server.on('error', onError);
-server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
