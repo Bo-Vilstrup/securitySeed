@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 
-var config = require('cloud-env');
+var configCloudEnv = require('cloud-env');
+
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise; // removes warning about promises
 
 /**
  * Module dependencies.
@@ -23,11 +26,12 @@ var http = require('http');
 // var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 // app.set('ip', ip);
 
-
-
-var port = config.PORT;
+    
+var port = configCloudEnv.get('PORT', 3000);
+var ip = configCloudEnv.get('IP','127.0.0.1');
+// var port = configCloudEnv.PORT;
+// var ip = configCloudEnv.IP;
 app.set('port', port);
-var ip = config.IP;
 app.set('ip', ip);
 
 
@@ -41,6 +45,48 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+
+//The db.js file refered to in the slide-set
+//var db = require("../db/db");
+//Connection string to your local database (replace xxx with relevant info)
+//var connection_string = "mongodb://localhost:27017/test"; //"mongodb://xxxxxxxxxxxxxxxx";
+
+var DEFAULT_LOCAL_DB = "mongodb://localhost/cs5610";
+var connection_string = configCloudEnv.get("MONGODB_DB_URL", DEFAULT_LOCAL_DB);
+
+mongoose.connect(connection_string);
+
+server.listen(app.get("port"),app.get("ip"));
+/*
+db.connect(connection_string,function(err){
+    if(err){
+        console.log("Could not connect to Database");
+    } else
+    {
+        server.listen(app.get("port"),app.get("ip"));
+        server.on('error', onError);
+        server.on('listening', onListening);
+    }
+});
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //server.listen(port);
 server.listen(port, ip);
