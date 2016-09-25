@@ -43,4 +43,4 @@ Changed to:
     "main" : "./bin/www",
     
     
-    
+    "test": "node_modules/.bin/mocha -w"
