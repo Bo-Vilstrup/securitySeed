@@ -53,7 +53,8 @@ var server = http.createServer(app);
 //var connection_string = "mongodb://localhost:27017/test"; //"mongodb://xxxxxxxxxxxxxxxx";
 
 var DEFAULT_LOCAL_DB = "mongodb://localhost/cs5610";
-var connection_string = configCloudEnv.get("MONGODB_DB_URL", DEFAULT_LOCAL_DB);
+// var connection_string = configCloudEnv.get("MONGODB_DB_URL", DEFAULT_LOCAL_DB);
+var connection_string = configCloudEnv.MONGODB_DB_URL;
 
 mongoose.connect(connection_string);
 
