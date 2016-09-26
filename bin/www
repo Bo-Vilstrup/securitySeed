@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 'use strict';
 
-var configCloudEnv = require('cloud-env');
-
-//var mongoose = require('mongoose');
-//mongoose.Promise = global.Promise; // removes warning about promises
 
 /**
  * Module dependencies.
  */
+
+// Bring cloud-env into the app :: 
+// cloud-env provides a vendor-neutral interface for autoconfiguring your server,
+// allowing it to run on a variety of cloud hosting platforms.
+var configCloudEnv = require('cloud-env');
 
 var app = require('../server');
 var debug = require('debug')('ProjectFlashCardServerSeed2:server');
@@ -37,27 +38,8 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+// Setup and connect database
 require('../config/db/db');
-// var localDataBase = '/cs5610';
-// var connection_string = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
-//
-// // Connect to mongodb
-// var connect = function () {
-//   mongoose.connect(connection_string);
-//   console.log("connected to database: " + connection_string);
-// };
-// connect();
-//
-// var db = mongoose.connection;
-//
-// db.on('error', function(error){
-//   console.log("Error loading the db - "+ error);
-// });
-//
-// db.on('disconnected', connect);
-
-
-
 
 
 server.listen(app.get("port"),app.get("ip"), function () {
