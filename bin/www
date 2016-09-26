@@ -52,11 +52,18 @@ var server = http.createServer(app);
 //Connection string to your local database (replace xxx with relevant info)
 //var connection_string = "mongodb://localhost:27017/test"; //"mongodb://xxxxxxxxxxxxxxxx";
 
-// var DEFAULT_LOCAL_DB = "mongodb://localhost/cs5610";
+//var DEFAULT_LOCAL_DB = "mongodb://localhost/cs5610";
 // // var connection_string = configCloudEnv.get("MONGODB_DB_URL", DEFAULT_LOCAL_DB);
 // var connection_string = configCloudEnv.MONGODB_DB_URL;
 //
-// mongoose.connect(connection_string);
+
+
+
+var connection_string = configCloudEnv.MONGODB_DB_URL + "/" + configCloudEnv.get('APP_NAME', 'cs5610');
+
+
+mongoose.connect(connection_string);
+console.log(connection_string);
 
 server.listen(app.get("port"),app.get("ip"));
 /*
