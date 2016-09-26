@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-//var configCloudEnv = require('cloud-env');
+var configCloudEnv = require('cloud-env');
 
 // var environment = [
 //   "port: " + configCloudEnv.PORT,
@@ -12,7 +12,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', {
                       title: 'Express',
-                      env : process.env
+                      env : process.env,
+                        config  : configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', '/cs5610')
   });
 });
 
