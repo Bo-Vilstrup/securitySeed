@@ -3,7 +3,7 @@
 
 var configCloudEnv = require('cloud-env');
 
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 //mongoose.Promise = global.Promise; // removes warning about promises
 
 /**
@@ -18,7 +18,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-    
+// overwrite default values in configCloudEnv
 var port = configCloudEnv.get('PORT', 3000);
 var ip = configCloudEnv.get('IP','127.0.0.1');
 //var port = configCloudEnv.PORT;
@@ -37,30 +37,32 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+require('../config/db/db');
+// var localDataBase = '/cs5610';
+// var connection_string = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
+//
+// // Connect to mongodb
+// var connect = function () {
+//   mongoose.connect(connection_string);
+//   console.log("connected to database: " + connection_string);
+// };
+// connect();
+//
+// var db = mongoose.connection;
+//
+// db.on('error', function(error){
+//   console.log("Error loading the db - "+ error);
+// });
+//
+// db.on('disconnected', connect);
 
-var localDataBase = '/cs5610';
-var connection_string = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
 
-// Connect to mongodb
-var connect = function () {
-  mongoose.connect(connection_string);
-  console.log("connected to database: " + connection_string);
-};
-connect();
 
-var db = mongoose.connection;
 
-db.on('error', function(error){
-  console.log("Error loading the db - "+ error);
+
+server.listen(app.get("port"),app.get("ip"), function () {
+  console.log("Server running at http://" + app.get("ip") + ":" + app.get("port") + "/" );
 });
-
-db.on('disconnected', connect);
-
-
-
-
-
-server.listen(app.get("port"),app.get("ip"));
 server.on('error', onError);
 server.on('listening', onListening);
 
