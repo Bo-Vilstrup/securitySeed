@@ -4,7 +4,7 @@
 var configCloudEnv = require('cloud-env');
 
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise; // removes warning about promises
+//mongoose.Promise = global.Promise; // removes warning about promises
 
 /**
  * Module dependencies.
@@ -80,6 +80,20 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 
 //mongoose.connect(connection_string);
 
+
+// Connect to mongodb
+var connect = function () {
+  mongoose.connect(connection_string);
+};
+connect();
+
+var db = mongoose.connection;
+
+db.on('error', function(error){
+  console.log("Error loading the db - "+ error);
+});
+
+db.on('disconnected', connect);
 
 
 
