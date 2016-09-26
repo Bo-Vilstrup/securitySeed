@@ -3,24 +3,65 @@
  */
 'use strict';
 
+// Bring Mongoose into the app
 var mongoose = require('mongoose');
-//mongoose.Promise = global.Promise; // removes warning about promises
+
+// removes warning about promises
+//mongoose.Promise = global.Promise;
+
+// Bring cloud-env into the app :: 
+// cloud-env provides a vendor-neutral interface for autoconfiguring your server,
+// allowing it to run on a variety of cloud hosting platforms.
 var configCloudEnv = require('cloud-env');
 
+// Name of local database
 var localDataBase = '/cs5610';
-var connection_string = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
+// Build the connection string
+var dbURI = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
 
-// Connect to mongodb
-var connect = function () {
-    mongoose.connect(connection_string);
-    console.log("connected to database: " + connection_string);
-};
-connect();
+// // Connect to mongodb
+// var connect = function () {
+//     mongoose.connect(connection_string);
+//     console.log("connected to database: " + connection_string);
+// };
+// connect();
+//
+// var db = mongoose.connection;
+//
+// db.on('error', function(error){
+//     console.log("Error loading the db - "+ error);
+// });
+//
+// db.on('disconnected', connect);
 
-var db = mongoose.connection;
 
-db.on('error', function(error){
-    console.log("Error loading the db - "+ error);
+
+// Create the database connection
+mongoose.connect(dbURI);
+
+// CONNECTION EVENTS
+// When successfully connected
+mongoose.connection.on('connected', function () {
+    console.log('Mongoose connection to ' + dbURI);
 });
 
-db.on('disconnected', connect);
+// If the connection throws an error
+mongoose.connection.on('error',function (err) {
+    console.log('Mongoose connection error: ' + err);
+});
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {
+    console.log('Mongoose connection disconnected');
+});
+
+// If the Node process ends, close the Mongoose connection
+process.on('SIGINT', function() {
+    mongoose.connection.close(function () {
+        console.log('Mongoose connection disconnected through app termination');
+        process.exit(0);
+    });
+});
+
+// BRING IN YOUR SCHEMAS & MODELS ::
+// For example :: require('./../model/team');
