@@ -18,14 +18,6 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-// var port = normalizePort(process.env.PORT || '3000');
-// app.set('port', port);
-
-// var port = normalizePort(process.env.OPENSHIFT_NODEJS_PORT || '3000');
-// app.set('port', port);
-// var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-// app.set('ip', ip);
-
     
 var port = configCloudEnv.get('PORT', 3000);
 var ip = configCloudEnv.get('IP','127.0.0.1');
@@ -33,7 +25,6 @@ var ip = configCloudEnv.get('IP','127.0.0.1');
 //var ip = configCloudEnv.IP;
 app.set('port', port);
 app.set('ip', ip);
-
 
 
 /**
@@ -47,37 +38,8 @@ var server = http.createServer(app);
  */
 
 
-//The db.js file refered to in the slide-set
-//var db = require("../db/db");
-//Connection string to your local database (replace xxx with relevant info)
-//var connection_string = "mongodb://localhost:27017/test"; //"mongodb://xxxxxxxxxxxxxxxx";
-
-//var DEFAULT_LOCAL_DB = "mongodb://localhost/cs5610";
-// // var connection_string = configCloudEnv.get("MONGODB_DB_URL", DEFAULT_LOCAL_DB);
-// var connection_string = configCloudEnv.MONGODB_DB_URL;
-//
-
-
-
 var connection_string = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', '/cs5610');
 console.log(connection_string);
-
-
-
-
-
-// // default to a 'localhost' configuration:
-// var connection_string = '127.0.0.1:27017/cs5610';
-// // if OPENSHIFT env variables are present, use the available connection info:
-// if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-//   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-//       process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-//       process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-//       process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-//       process.env.OPENSHIFT_APP_NAME;
-// }
-
-//mongoose.connect(connection_string);
 
 
 // Connect to mongodb
@@ -99,64 +61,10 @@ db.on('disconnected', connect);
 
 
 server.listen(app.get("port"),app.get("ip"));
-/*
-db.connect(connection_string,function(err){
-    if(err){
-        console.log("Could not connect to Database");
-    } else
-    {
-        server.listen(app.get("port"),app.get("ip"));
-        server.on('error', onError);
-        server.on('listening', onListening);
-    }
-});
-
-*/
+server.on('error', onError);
+server.on('listening', onListening);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-// //server.listen(port);
-// server.listen(port, ip);
-// console.log("Listening on "+ip+", port "+port);
-// server.on('error', onError);
-// server.on('listening', onListening);
-//
-//
-
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-// function normalizePort(val) {
-//   var port = parseInt(val, 10);
-//
-//   if (isNaN(port)) {
-//     // named pipe
-//     return val;
-//   }
-//
-//   if (port >= 0) {
-//     // port number
-//     return port;
-//   }
-//
-//   return false;
-// }
 
 /**
  * Event listener for HTTP server "error" event.
