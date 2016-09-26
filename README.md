@@ -53,12 +53,12 @@ app.set('port', port);
 
 with:
 
-var config = require('cloud-env');
-
-var port = config.PORT;
-app.set('port', port);
-var ip = config.IP;
-app.set('ip', ip);
+    var config = require('cloud-env');
+    
+    var port = config.PORT;
+    app.set('port', port);
+    var ip = config.IP;
+    app.set('ip', ip);
 
 Now localize the line that starts the server : server.listen(port); and replace it with this:
 server.listen(port, ip);
@@ -66,10 +66,31 @@ server.listen(port, ip);
 
 #### change server.js
 
-npm install cors --save
+    npm install cors --save
+    
+    var cors = require('cors');
+    app.use(cors());
 
-var cors = require('cors');
-app.use(cors());
+### change bin/www
+
+```javascript
+    var connection_string = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', '/cs5610');
+    
+    // Connect to mongodb
+    var connect = function () {
+      mongoose.connect(connection_string);
+      console.log("connected to database: " + connection_string);
+    };
+    connect();
+    
+    var db = mongoose.connection;
+    
+    db.on('error', function(error){
+      console.log("Error loading the db - "+ error);
+    });
+
+db.on('disconnected', connect);
+```
 
 
 MongoDB 2.4 database added.  Please make note of these credentials:
