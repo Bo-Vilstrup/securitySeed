@@ -27,10 +27,10 @@ var http = require('http');
 // app.set('ip', ip);
 
     
-// var port = configCloudEnv.get('PORT', 3000);
-// var ip = configCloudEnv.get('IP','127.0.0.1');
-var port = configCloudEnv.PORT;
-var ip = configCloudEnv.IP;
+var port = configCloudEnv.get('PORT', 3000);
+var ip = configCloudEnv.get('IP','127.0.0.1');
+//var port = configCloudEnv.PORT;
+//var ip = configCloudEnv.IP;
 app.set('port', port);
 app.set('ip', ip);
 
@@ -52,11 +52,11 @@ var server = http.createServer(app);
 //Connection string to your local database (replace xxx with relevant info)
 //var connection_string = "mongodb://localhost:27017/test"; //"mongodb://xxxxxxxxxxxxxxxx";
 
-var DEFAULT_LOCAL_DB = "mongodb://localhost/cs5610";
-// var connection_string = configCloudEnv.get("MONGODB_DB_URL", DEFAULT_LOCAL_DB);
-var connection_string = configCloudEnv.MONGODB_DB_URL;
-
-mongoose.connect(connection_string);
+// var DEFAULT_LOCAL_DB = "mongodb://localhost/cs5610";
+// // var connection_string = configCloudEnv.get("MONGODB_DB_URL", DEFAULT_LOCAL_DB);
+// var connection_string = configCloudEnv.MONGODB_DB_URL;
+//
+// mongoose.connect(connection_string);
 
 server.listen(app.get("port"),app.get("ip"));
 /*
