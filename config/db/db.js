@@ -7,7 +7,7 @@
 var mongoose = require('mongoose');
 
 // removes warning about promises
-//mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
 // Bring cloud-env into the app :: 
 // cloud-env provides a vendor-neutral interface for autoconfiguring your server,
@@ -18,22 +18,6 @@ var configCloudEnv = require('cloud-env');
 var localDataBase = '/cs5610';
 // Build the connection string
 var dbURI = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
-
-// // Connect to mongodb
-// var connect = function () {
-//     mongoose.connect(connection_string);
-//     console.log("connected to database: " + connection_string);
-// };
-// connect();
-//
-// var db = mongoose.connection;
-//
-// db.on('error', function(error){
-//     console.log("Error loading the db - "+ error);
-// });
-//
-// db.on('disconnected', connect);
-
 
 
 // Create the database connection
