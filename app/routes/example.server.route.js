@@ -19,8 +19,8 @@ router.route('/form/:id')
     .delete(person.delete);
 
 router.route('/form')
-    .post(person.save);
-    //.put(person.update);
+    .post(person.save)
+    .put(person.update);
 
 module.exports = router;
 

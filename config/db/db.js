@@ -7,7 +7,7 @@
 var mongoose = require('mongoose');
 
 // removes warning about promises
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 
 // Bring cloud-env into the app :: 
 // cloud-env provides a vendor-neutral interface for autoconfiguring your server,
