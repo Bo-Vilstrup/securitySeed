@@ -6,7 +6,7 @@
 // Bring Mongoose into the app
 var mongoose = require('mongoose');
 
-// removes warning about promises
+// removes warning about promises (dont add this line !! gives problems on openshift
 //mongoose.Promise = global.Promise;
 
 // Bring cloud-env into the app :: 
