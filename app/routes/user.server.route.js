@@ -6,21 +6,21 @@
 var express = require('express');
 var router = express.Router();
 
-require('../../app/models/example.server.model'); // this has to be moved to a config file or something
-var person = require('../../app/controllers/example.server.controller');
+require('../models/user.server.model.js'); // this has to be moved to a config file or something
+var user = require('../controllers/user.server.controller.js');
 
 
 
 router.route('/forms')
-    .get(person.listAll);
+    .get(user.listAll);
 
 router.route('/form/:id')
-    .get(person.getOne)
-    .delete(person.delete);
+    .get(user.getOne)
+    .delete(user.delete);
 
 router.route('/form')
-    .post(person.save)
-    .put(person.update);
+    .post(user.save)
+    .put(user.update);
 
 module.exports = router;
 
@@ -71,12 +71,12 @@ module.exports = router;
 //     created : {type : Date, default : Date.now }
 // }, {collection : "form"});
 //
-// var Form = mongoose.model("Form", FormSchema); // entity manager
+// var User = mongoose.model("User", FormSchema); // entity manager
 //
 //
 // router.get('/forms', function(req, res){
 //
-//     Form.find(function (err, data) {
+//     User.find(function (err, data) {
 //         if(err) {
 //             res.json(err);
 //         } else {
@@ -90,7 +90,7 @@ module.exports = router;
 //
 //     var id = req.params.id;
 //
-//     Form.findById(id, function(err, data) {
+//     User.findById(id, function(err, data) {
 //         if(err) {
 //             res.json(err);
 //         } else {
@@ -104,7 +104,7 @@ module.exports = router;
 //
 //     var id = req.params.id;
 //
-//     Form.remove({"_id" : id}, function (err, result) {
+//     User.remove({"_id" : id}, function (err, result) {
 //         if(err) {
 //             res.json(err);
 //         } else {
@@ -116,9 +116,9 @@ module.exports = router;
 //
 // router.post('/form', function (req, res) {
 //
-//     var person = new Form(req.body);
+//     var user = new User(req.body);
 //
-//     person.save(function (err, createdDocument) {
+//     user.save(function (err, createdDocument) {
 //         if(err) {
 //             res.json(err);
 //         } else {
@@ -137,7 +137,7 @@ module.exports = router;
 //         email: req.body.email
 //     };
 //
-//     Form.findByIdAndUpdate(id, editPerson, { 'new': true},function(err, result) {
+//     User.findByIdAndUpdate(id, editPerson, { 'new': true},function(err, result) {
 //         if(err) {
 //             res.json(err);
 //         } else {

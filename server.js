@@ -9,11 +9,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
-var example = require('./app/routes/example.server.route');
+var user = require('./app/routes/user.server.route.js');
 var card = require('./app/routes/card.server.route');
 var deck = require('./app/routes/deck.server.route');
 var routes = require('./app/routes/index');
-var users = require('./app/routes/users');
 
 var app = express();
 
@@ -30,11 +29,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', example);
+app.use('/api', user);
 app.use('/api', card);
 app.use('/api', deck);
 app.use('/', routes);
-app.use('/users', users);
 
 
 

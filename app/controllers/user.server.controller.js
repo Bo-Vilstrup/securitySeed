@@ -4,12 +4,12 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Form = mongoose.model('Form');
+var User = mongoose.model('User');
 
 
 exports.listAll = function (req, res) {
 
-    Form.find(function (err, data) {
+    User.find(function (err, data) {
         if(err) {
             res.json(err);
         } else {
@@ -22,7 +22,7 @@ exports.getOne = function (req, res) {
 
     var id = req.params.id;
 
-    Form.findById(id, function(err, data) {
+    User.findById(id, function(err, data) {
         if(err) {
             res.json(err);
         } else {
@@ -36,7 +36,7 @@ exports.delete = function (req, res) {
 
     var id = req.params.id;
 
-    Form.remove({"_id" : id}, function (err, result) {
+    User.remove({"_id" : id}, function (err, result) {
         if(err) {
             res.json(err);
         } else {
@@ -48,9 +48,9 @@ exports.delete = function (req, res) {
 
 exports.save =  function (req, res) {
 
-    var newPerson = new Form(req.body);
+    var newUser = new User(req.body);
     
-    newPerson.save(function (err, createdDocument) {
+    newUser.save(function (err, createdDocument) {
         if(err) {
             res.json(err);
         } else {
@@ -70,7 +70,7 @@ exports.update = function (req, res) {
         email: req.body.email
     };
 
-    Form.findByIdAndUpdate(id, editPerson, { 'new': true},function(err, result) {
+    User.findByIdAndUpdate(id, editPerson, { 'new': true},function(err, result) {
         if(err) {
             res.json(err);
         } else {

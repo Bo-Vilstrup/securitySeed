@@ -11,6 +11,6 @@ var FormSchema = new mongoose.Schema({
     lastName : String,
     email : String,
     created : {type : Date, default : Date.now }
-}, {collection : "form"});
+}, {collection : "user"});
 
-mongoose.model("Form", FormSchema); // entity manager
+mongoose.model("User", FormSchema); // entity manager
