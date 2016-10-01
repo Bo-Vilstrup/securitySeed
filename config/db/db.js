@@ -15,7 +15,7 @@ var mongoose = require('mongoose');
 var configCloudEnv = require('cloud-env');
 
 // Name of local database
-var localDataBase = '/cs5610';
+var localDataBase =  '/flashcard';     //  old data base name ->  '/cs5610';
 // Build the connection string
 var dbURI = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
 
