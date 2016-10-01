@@ -11,14 +11,14 @@ var user = require('../controllers/user.server.controller.js');
 
 
 
-router.route('/forms')
+router.route('/users')
     .get(user.listAll);
 
-router.route('/form/:id')
+router.route('/user/:id')
     .get(user.getOne)
     .delete(user.delete);
 
-router.route('/form')
+router.route('/user')
     .post(user.save)
     .put(user.update);
 
