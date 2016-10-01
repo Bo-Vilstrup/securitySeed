@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 
 
 var example = require('./app/routes/example.server.route');
+var card = require('./app/routes/card.server.route');
+var deck = require('./app/routes/deck.server.route');
 var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
 
@@ -29,6 +31,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', example);
+app.use('/api', card);
+app.use('/api', deck);
 app.use('/', routes);
 app.use('/users', users);
 
