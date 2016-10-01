@@ -4,10 +4,11 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var CardSchema = require('../../app/models/card.server.model');
 
 var FormSchema = new mongoose.Schema({
     deckTitle : String,
-    cards : []
+    cards : [CardSchema]
 }, {collection : "deck"});
 
 mongoose.model("Deck", FormSchema); // entity manager
