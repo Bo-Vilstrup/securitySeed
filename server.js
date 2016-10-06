@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 
 
 var user = require('./app/routes/user.server.route.js');
+var dailyExercises = require('./app/routes/dailyExercises.server.route');
 var card = require('./app/routes/card.server.route');
 var deck = require('./app/routes/deck.server.route');
 var routes = require('./app/routes/index');
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', user);
+app.use('/api', dailyExercises);
 app.use('/api', card);
 app.use('/api', deck);
 app.use('/', routes);
