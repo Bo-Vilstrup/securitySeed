@@ -23,6 +23,31 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+
+//app.use(function(req, res, next) {
+//
+//  var sessionUserName = req.session.userName;
+//  var formUserName = req.body.userName;
+//
+//  if( req.url.match(/^\/api\//).toString() === "/api/") return next();
+//  if(sessionUserName) return next();
+//  if(formUserName) {
+//    req.session.userName =  formUserName;
+//    res.redirect("/");
+//  } else {
+//    req.url = "/login";
+//    next();
+//  }
+//});
+
+
+
+
+
+
+
+
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
