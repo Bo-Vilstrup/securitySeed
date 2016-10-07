@@ -34,7 +34,7 @@ exports.getDeck = function (req, res) {
         });
         cards.push(newCard);
     }
-    res.json(cards);
+    res.json({"deck": cards});
 }; // End of find all
 
 
