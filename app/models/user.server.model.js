@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var FormSchema = new mongoose.Schema({
     firstName : String,
     lastName : String,
+    userName : { type: String, unique: true },
     email : String,
     created : {type : Date, default : Date.now }
 }, {collection : "user"});

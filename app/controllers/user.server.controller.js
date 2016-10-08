@@ -7,6 +7,39 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 
+
+exports.signup = function (req, res) {
+    
+    var newUser = new User(req.body);
+    var userName = req.body.userName;
+
+    newUser.save(function (err, createdDocument) {
+        if(err) {
+            res.json(err);
+        } else {
+            req.session.userName = userName;
+            res.json(createdDocument);
+        }
+    });
+};
+
+
+exports.signin = function (req, res) {
+
+    var userName = req.body.userName;
+
+    User.findOne({ 'userName': userName }, function (err, data) {
+        if(err) {
+            res.json(err);
+        } else {
+            req.session.userName = userName;
+            res.json(data);
+        }
+    });
+};
+
+
+
 exports.listAll = function (req, res) {
 
     User.find(function (err, data) {

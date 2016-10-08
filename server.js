@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 
 var user = require('./app/routes/user.server.route.js');
@@ -25,35 +26,41 @@ app.set('view engine', 'hbs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 
-//app.use(function(req, res, next) {
-//
-//  var sessionUserName = req.session.userName;
-//  var formUserName = req.body.userName;
-//
-//  if( req.url.match(/^\/api\//).toString() === "/api/") return next();
-//  if(sessionUserName) return next();
-//  if(formUserName) {
-//    req.session.userName =  formUserName;
-//    res.redirect("/");
-//  } else {
-//    req.url = "/login";
-//    next();
-//  }
-//});
-
-
-
-
-
-
-
-
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+//   //cookie: { secure: true }
+// }));
+//
+// app.use(function(req, res, next) {
+//
+//   var sessionUserName = req.session.userName;
+//   var userName = req.body.userName;
+//
+//   if(sessionUserName) return next();
+//   if(userName) {
+//     // everything will be handled in user.server.route
+//     // either in login or signin
+//     // req.session.userName will be set to userName;
+//     next();
+//   } else {
+//     res.status(401).json({"msg" : "you need to signup or login"});
+//   }
+// });
+
+
+
+
 
 app.use('/api', user);
 app.use('/api', dailyExercises);

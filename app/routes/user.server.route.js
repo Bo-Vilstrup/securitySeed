@@ -10,6 +10,15 @@ require('../models/user.server.model.js'); // this has to be moved to a config f
 var user = require('../controllers/user.server.controller.js');
 
 
+router.route('/signup')
+    .post(user.signup);
+
+router.route('/signin')
+    .post(user.signin);
+//
+// router.route('/signout')
+//     .post(user.signout);
+
 
 router.route('/users')
     .get(user.listAll);

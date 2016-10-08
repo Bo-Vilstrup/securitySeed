@@ -5,10 +5,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ProjectFlashCardServerSeed2 node_modules" level="project" />
-    <orderEntry type="library" name="express-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="node-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="mongoose-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="express-route-fs-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="nodeserver node_modules" level="project" />
+    <orderEntry type="library" name="FlashCardServer node_modules" level="project" />
+    <orderEntry type="library" name="node-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="express-session-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="morgan-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="express-DefinitelyTyped" level="application" />
   </component>
 </module>
