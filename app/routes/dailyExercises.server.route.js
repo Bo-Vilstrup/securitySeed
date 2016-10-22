@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 require('../models/card.server.model'); // this has to be moved to a config file or something
+require('../models/card.server.model2'); // this has to be moved to a config file or something
 var dailyExercises = require('../controllers/dailyExercises.server.controller');
 
 

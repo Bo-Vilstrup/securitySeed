@@ -6,13 +6,29 @@
 var mongoose = require('mongoose');
 
 var CardSchema = new mongoose.Schema({
-    question : String,
-    answers : [
-        {id: 0, text: String},
-        {id: 1, text: String},
-        {id: 2, text: String},
-        {id: 3, text: String}
-    ]
-}, {collection : "card"});
 
-mongoose.model("Card", CardSchema); // entity manager
+    id: String,
+    name: String,
+    flashcards: [
+        {
+            id: String,
+            category: String,
+            question: String,
+            answers: [
+                {
+                    answer: String,
+                    isCorrect: Boolean,
+                    ratings: {
+                        rating: { type: Number, default: -1 },
+                        durationElapsed: { type: Number, default: -1 },
+                        correctAnswered: { type: Boolean, default: false },
+                        solvedDate: { type: Date, default: '' }
+                    }
+                }
+            ]
+        }
+    ]
+
+}, {collection: "card2"});
+
+mongoose.model("Card2", CardSchema); // entity manager
