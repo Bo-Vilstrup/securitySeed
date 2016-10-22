@@ -20,7 +20,7 @@ exports.getDeck = function (req, res) {
     var cards = [];
 
     // number of cards given back by dailyExercises api
-    var maxCards = 2;
+    var maxCards = 40;
     var minCards = 0;
 
     // // number of answers available on a card
