@@ -13,15 +13,13 @@ var Card = mongoose.model('Card');
 var Card2 = mongoose.model('Card2');
 
 
-
-
 exports.getDeck = function (req, res) {
 
     var cards = [];
 
     // number of cards given back by dailyExercises api
-    var maxCards = 1;
-    var minCards = 0;
+    var maxCards = 20;
+    var minCards = 1;
 
     // // number of answers available on a card
     // var minAnswers = 1;
@@ -34,72 +32,55 @@ exports.getDeck = function (req, res) {
     for (var index = minCards; index < numberOFCards; index++) {
 
         var newCard = new Card2({
-            
-            id: "id"+index,
-            name: "name"+index,
-            flashcards: [
+
+            "category": "Category",
+            "question": "question "+index,
+            "rating": {
+                "nextRepetition": Date.now()
+            },
+            "answers": [
                 {
-                    id: "id"+1,
-                    category: "category",
-                    question: "question",
-                    answers: [
-                        {
-                            answer: "answer"+1,
-                            isCorrect: false
-                        },
-                        {
-                            answer: "answer"+2,
-                            isCorrect: true
-                        },
-                        {
-                            answer: "answer"+3,
-                            isCorrect: false
-                        },
-                        {
-                            answer: "answer"+4,
-                            isCorrect: false
-                        }
-                    ]
+                    "answer": "Answer "+1,
+                    "isCorrect": false
+                },
+                {
+                    "answer": "Answer "+2,
+                    "isCorrect": true
+                },
+                {
+                    "answer": "Answer "+3,
+                    "isCorrect": false
+                },
+                {
+                    "answer": "Answer "+4,
+                    "isCorrect": false
                 }
             ]
         }); // end of card
         cards.push(newCard);
     }
-    res.json({"user": cards});
+
+   
+    
+    // for(var i=0; i < cards.length; i++) {
+    //     var joCard = cards[i].toJSON();
+    //     delete joCard.rating;
+    //     cards.push(JSON.parse( JSON.stringify(joCard) ));
+    //     //cards.push(obj);
+    //     //console.log(obj);
+    // };
+    
+   
+
+    res.json({"flashcards": cards});
 }; // End of find all
 
 
 
-
-// exports.getDeck = function (req, res) {
-//
-//     var cards = [];
-//
-//     var maxCards = 40;
-//     var minCards = 0;
-//
-//     var randomNumber = Math.random(); // [0 .. 1]
-//     var numberOFCards = Math.round(randomNumber * maxCards);
-//
-//     for (var index = minCards; index < numberOFCards; index++) {
-//
-//         var newCard = new Card({
-//             question: "Question " + index,
-//             answers: [
-//                 {id: 0, text: "answers 0"},
-//                 {id: 1, text: "answers 1"},
-//                 {id: 2, text: "answers 2"},
-//                 {id: 3, text: "answers 3"}
-//             ]
-//         });
-//         cards.push(newCard);
-//     }
-//     res.json({"deck": cards});
-// }; // End of find all
-
-
 exports.saveEvaluation = function (req, res) {
 
-    res.json({"dataSaved" : "not implemented yet"}); // not implemented yet
+    res.json({"dataSaved" : "ok"}); // not implemented yet
 
 }; // End of saveEvaluation (post)
+
+

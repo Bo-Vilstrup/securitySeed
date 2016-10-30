@@ -4,31 +4,29 @@
 'use strict';
 
 var mongoose = require('mongoose');
+require('mongoose-double')(mongoose);
+var SchemaTypes = mongoose.Schema.Types;
 
 var CardSchema = new mongoose.Schema({
-
-    id: String,
-    name: String,
-    flashcards: [
+    
+    "category": "String",
+    "question": "String",
+    "rating": {
+        "durationElapsed": { type: Number, default: -1 },
+        "correctAnswered": { type: Boolean, default: false },
+        "lastRepetition": { type: Date, default: '' },
+        "nextRepetition": { type: Date, default: '' },
+        "grade": { type: Number, default: -1 },
+        "interval": { type: Number, default: -1 },
+        "repetition": { type: Number, default: -1 },
+        "ef": { type: SchemaTypes.Double, default: 2.5}
+    },
+    "answers": [
         {
-            id: String,
-            category: String,
-            question: String,
-            answers: [
-                {
-                    answer: String,
-                    isCorrect: Boolean,
-                    ratings: {
-                        rating: { type: Number, default: -1 },
-                        durationElapsed: { type: Number, default: -1 },
-                        correctAnswered: { type: Boolean, default: false },
-                        solvedDate: { type: Date, default: '' }
-                    }
-                }
-            ]
+            "answer": "String",
+            "isCorrect": { type: Boolean, default: false }
         }
     ]
-
 }, {collection: "card2"});
 
 mongoose.model("Card2", CardSchema); // entity manager

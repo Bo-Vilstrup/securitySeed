@@ -11,7 +11,13 @@ var dailyExercises = require('../controllers/dailyExercises.server.controller');
 
 
 router.route('/dailyExercises')
-    .get(dailyExercises.getDeck)
+    .get(dailyExercises.getDeck);
+
+
+router.route('/getFutureCards')
+    .get(dailyExercises.getDeck);
+
+router.route('/postCards')
     .post(dailyExercises.saveEvaluation); // post is not implemented yet
 
 module.exports = router;
