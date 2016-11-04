@@ -32,7 +32,8 @@ exports.signin = function (req, res) {
         if(err) {
             res.json(err);
         } else {
-            req.session.userName = userName;
+            if(data != null)
+                req.session.userName = userName;
             res.json(data);
         }
     });
