@@ -4,7 +4,8 @@
 var express = require('express');
 var router = express.Router();
 
-require('../../app/models/card.server.model'); // this has to be moved to a config file or something
+//require('../../app/models/card.server.model'); // this has to be moved to a config file or something
+require('../../app/models/card.server.model2'); // this has to be moved to a config file or something
 var card = require('../../app/controllers/card.server.controller');
 
 
@@ -17,6 +18,7 @@ router.route('/card/:id')
     .delete(card.delete);
 
 router.route('/card')
+    .put(card.update)
     .post(card.save);
 
 module.exports = router;

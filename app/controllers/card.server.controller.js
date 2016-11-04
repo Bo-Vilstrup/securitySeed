@@ -4,7 +4,8 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Card = mongoose.model('Card');
+// var Card = mongoose.model('Card');
+var Card = mongoose.model('Card2');
 
 
 exports.listAll = function (req, res) {
@@ -58,4 +59,58 @@ exports.save =  function (req, res) {
         }
     });
 };  // End of post (save)
+
+exports.update = function (req, res) {
+    
+    var id = req.body._id;
+    var editCard = {
+        "category": req.body.category,
+        "question": req.body.question
+    };
+    
+    Card.findByIdAndUpdate(id, editCard, { 'new': true},function(err, result) {
+        if(err) {
+            res.json(err);
+        } else {
+            res.json(result);
+        }
+    });
+}; // End of put (edit)
+
+
+
+
+/*
+ {
+ "category": "String",
+ "question": "String",
+ "rating": {
+
+ "durationElapsed": "Number",
+ "correctAnswered": "Boolean",
+
+ "lastRepetition": "Date",
+ "nextRepetition": "Date",
+
+ "grade": "Number",
+ "interval": "Number",
+ "repetition": "Number",
+ "ef": "SchemaTypes.Double"
+
+ },
+ "answers": [
+ {
+ "answer": "String",
+ "isCorrect": "Boolean"
+ }
+ ]
+ }
+
+
+
+*/
+
+
+
+
 
