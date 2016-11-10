@@ -30,3 +30,13 @@ var CardSchema = new mongoose.Schema({
 }, {collection: "card2"});
 
 mongoose.model("Card2", CardSchema); // entity manager
+
+
+var CardsSchema = new mongoose.Schema({
+
+    "user" : { type: String },
+    "flashcards": [CardSchema]
+
+}, {collection: "cards"});
+
+mongoose.model("Cards", CardsSchema); // entity manager

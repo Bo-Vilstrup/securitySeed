@@ -35,28 +35,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true
-//   //cookie: { secure: true }
-// }));
-//
-// app.use(function(req, res, next) {
-//
-//   var sessionUserName = req.session.userName;
-//   var userName = req.body.userName;
-//
-//   if(sessionUserName) return next();
-//   if(userName) {
-//     // everything will be handled in user.server.route
-//     // either in login or signin
-//     // req.session.userName will be set to userName;
-//     next();
-//   } else {
-//     res.status(401).json({"msg" : "you need to signup or login"});
-//   }
-// });
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+  //cookie: { secure: true }
+}));
+
+app.use(function(req, res, next) {
+
+  var sessionUserName = req.session.userName;
+  var userName = req.body.userName;
+
+  if(sessionUserName) return next();
+  if(userName) {
+    // everything will be handled in user.server.route
+    // either in login or signin
+    // req.session.userName will be set to userName;
+    next();
+  } else {
+    res.status(401).json({"msg" : "you need to signup or login"});
+  }
+});
 
 
 

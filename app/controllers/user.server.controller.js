@@ -6,6 +6,9 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
+var Cards = mongoose.model('Cards');
+
+
 
 
 exports.signup = function (req, res) {
@@ -17,11 +20,25 @@ exports.signup = function (req, res) {
         if(err) {
             res.json(err);
         } else {
-            req.session.userName = userName;
-            res.json(createdDocument);
+            //create a place in the database for the user
+            if(createdDocument != null) {
+                var newUserDB = new Cards({"user": userName});
+              
+                newUserDB.save(function (err, db) {
+                    if(err) {
+                        res.json(err);
+                    } else {
+                        console.log("here i AM");
+                        req.session.userName = userName;
+                        res.json(createdDocument);
+                    }
+                }); // End of save newUserDB
+            }
+            // req.session.userName = userName;
+            // res.json(createdDocument);
         }
-    });
-};
+    }); // End of Save newUSer
+}; // End of signup
 
 
 exports.signin = function (req, res) {
