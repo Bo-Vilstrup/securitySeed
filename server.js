@@ -47,6 +47,11 @@ app.use(function(req, res, next) {
   var sessionUserName = req.session.userName;
   var userName = req.body.userName;
 
+  // delete these 3 lines in production when phone have implemented log in and out
+  if( req.url  === "/api/dailyExercises") return next();
+  if( req.url === "/api/getFutureCards") return next();
+  if( req.url  === "/api/postCards") return next();
+
   if(sessionUserName) return next();
   if(userName) {
     // everything will be handled in user.server.route
