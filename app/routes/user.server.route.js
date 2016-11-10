@@ -20,9 +20,9 @@ router.route('/signup')
 
 router.route('/signin')
     .post(user.signin);
-//
-// router.route('/signout')
-//     .post(user.signout);
+
+router.route('/signout')
+    .post(user.signout);
 
 
 router.route('/users')

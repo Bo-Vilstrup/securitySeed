@@ -34,8 +34,6 @@ exports.signup = function (req, res) {
                     }
                 }); // End of save newUserDB
             }
-            // req.session.userName = userName;
-            // res.json(createdDocument);
         }
     }); // End of Save newUSer
 }; // End of signup
@@ -54,6 +52,13 @@ exports.signin = function (req, res) {
             res.json(data);
         }
     });
+};
+
+exports.signout = function (req, res) {
+    
+    req.body.userName = null;
+    req.session.userName = null;
+    res.json({"signout": "you are now logged out"});
 };
 
 
