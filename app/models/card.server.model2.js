@@ -17,8 +17,8 @@ var CardSchema = new mongoose.Schema({
         "lastRepetition": { type: Date, default: '' },
         "nextRepetition": { type: Date, default: '' },
         "grade": { type: Number, default: -1 },
-        "interval": { type: Number, default: -1 },
-        "repetition": { type: Number, default: -1 },
+        "interval": { type: Number, default: 0 },
+        "repetition": { type: Number, default: 0 },
         "ef": { type: SchemaTypes.Double, default: 2.5}
     },
     "answers": [

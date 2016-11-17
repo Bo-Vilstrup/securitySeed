@@ -28,7 +28,7 @@ exports.signup = function (req, res) {
                     if(err) {
                         res.json(err);
                     } else {
-                        console.log("here i AM");
+                        console.log("here i AM :: user.server.controller");
                         req.session.userName = userName;
                         res.json(createdDocument);
                     }

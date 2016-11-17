@@ -38,7 +38,7 @@ describe("test sm2 algorithm", function() {
             console.log("Server running at http://" + app.get("ip") + ":" + app.get("port") + "/");
 
 
-            // make room for a test user
+            // make room for a test user -----
             var signup = {
                 url: "http://localhost:" + TEST_PORT + "/api/signup",
                 form: {"userName": "test10"}
@@ -59,6 +59,19 @@ describe("test sm2 algorithm", function() {
                         }
                     });
                 }
+            });
+            // insert some data in the database
+            var signin = {
+                url: "http://localhost:" + TEST_PORT + "/api/card",
+                form: {"userName": "test10"}
+            };
+            var fl = [];
+
+            fl = flashcards(); //JSON.parse("[{},{}]");
+            fl.forEach(function (item, index) {
+                var i = cal.calcIntervalEF(item, 3);
+                console.log(item);
+                console.log(index);
             });
             
             
