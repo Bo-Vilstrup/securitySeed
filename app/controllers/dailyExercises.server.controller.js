@@ -18,8 +18,8 @@ exports.getDeck = function (req, res) {
     var cards = [];
 
     // number of cards given back by dailyExercises api
-    var maxCards = 20;
-    var minCards = 1;
+    var maxCards = 0;
+    var minCards = 0;
 
     // // number of answers available on a card
     // var minAnswers = 1;
@@ -27,7 +27,7 @@ exports.getDeck = function (req, res) {
 
     // Get a random number of cards.
     var randomNumber = Math.random(); // [0 .. 1]
-    var numberOFCards = Math.round(randomNumber * maxCards);
+    var numberOFCards = Math.round(randomNumber * maxCards) + 1;
 
     for (var index = minCards; index < numberOFCards; index++) {
 

@@ -139,48 +139,48 @@ today.setHours(0, 0, 0, 0);
 // EF (easiness factor) is a rating for how difficult the card is.
 // Grade: (0-2) Set reps and interval to 0, keep current EF (repeat card today)
 //        (3)   Set interval to 0, lower the EF, reps + 1 (repeat card today)
-//        (4-5) Reps + 1, interval is calculated using EF, increasing in time.
+//        (4-5) Reps + 1, interval is calculated using EF, increasing in time. 
 function calcIntervalEF(card, grade) {
-    var oldEF = card.EF,
+    var oldEF = card.rating.ef,
         newEF = 0,
         nextDate = new Date(today);
 
     if (grade < 3) {
-        card.reps = 0;
-        card.interval = 0;
+        card.rating.repetition = 0;
+        card.rating.interval = 0;
     } else {
 
         newEF = oldEF + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02));
         if (newEF < 1.3) { // 1.3 is the minimum EF
-            card.EF = 1.3;
+            card.rating.ef = 1.3;
         } else {
-            card.EF = newEF;
+            card.rating.ef = newEF;
         }
 
-        card.reps = card.reps + 1;
+        card.rating.repetition = card.rating.repetition + 1;
 
-        switch (card.reps) {
+        switch (card.rating.repetition) {
             case 1:
-                card.interval = 1;
+                card.rating.interval = 1;
                 break;
             case 2:
-                card.interval = 6;
+                card.rating.interval = 6;
                 break;
             default:
-                card.interval = Math.round((card.reps - 1) * card.EF);
+                card.rating.interval = Math.round((card.rating.repetition - 1) * card.rating.ef);
                 break;
         }
     }
 
     if (grade === 3) {
-        card.interval = 0;
+        card.rating.interval = 0;
     }
 
-    nextDate.setDate(today.getDate() + card.interval);
-    card.nextDate = nextDate;
+    nextDate.setDate(today.getDate() + card.rating.interval);
+    card.rating.nextRepetition = nextDate;
 }
 
-module.exports = calcIntervalEF;
+module.exports.calcIntervalEF = calcIntervalEF;
 
 // function writeCardFile(cardFile) {
 //     fs.writeFileSync(cardFile, JSON.stringify(cards, null, 2));
@@ -190,3 +190,64 @@ module.exports = calcIntervalEF;
 // cards = readCardFile(cardFile);
 // count = cardQuizCount();
 // preQuiz(count);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// backup
+
+/*
+ function calcIntervalEF(card, grade) {
+ var oldEF = card.EF,
+ newEF = 0,
+ nextDate = new Date(today);
+
+ if (grade < 3) {
+ card.reps = 0;
+ card.interval = 0;
+ } else {
+
+ newEF = oldEF + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02));
+ if (newEF < 1.3) { // 1.3 is the minimum EF
+ card.EF = 1.3;
+ } else {
+ card.EF = newEF;
+ }
+
+ card.reps = card.reps + 1;
+
+ switch (card.reps) {
+ case 1:
+ card.interval = 1;
+ break;
+ case 2:
+ card.interval = 6;
+ break;
+ default:
+ card.interval = Math.round((card.reps - 1) * card.EF);
+ break;
+ }
+ }
+
+ if (grade === 3) {
+ card.interval = 0;
+ }
+
+ nextDate.setDate(today.getDate() + card.interval);
+ card.nextDate = nextDate;
+ }
+
+*/
+
+
