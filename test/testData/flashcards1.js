@@ -28,17 +28,7 @@ var flashcards =
                     "_id": "58249eedcea24f26fe384960",
                     "isCorrect": false
                 }
-            ],
-            "rating": {
-                "ef": 2.5,
-                "repetition": 0,
-                "interval": 0,
-                "grade": -1,
-                "nextRepetition": null,
-                "lastRepetition": null,
-                "correctAnswered": false,
-                "durationElapsed": -1
-            }
+            ]
         },
         {
             "category": "category :: Computer abbreviations",
@@ -65,17 +55,7 @@ var flashcards =
                     "_id": "582c5a6d842cc018c1a86b30",
                     "isCorrect": true
                 }
-            ],
-            "rating": {
-                "ef": 2.5,
-                "repetition": 0,
-                "interval": 0,
-                "grade": -1,
-                "nextRepetition": "2016-11-16T13:09:01.441Z",
-                "lastRepetition": null,
-                "correctAnswered": false,
-                "durationElapsed": -1
-            }
+            ]
         },
         {
             "category": "category :: Computer abbreviations",

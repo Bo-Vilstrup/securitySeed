@@ -145,6 +145,8 @@ function calcIntervalEF(card, grade) {
         newEF = 0,
         nextDate = new Date(today);
 
+    card.rating.grade = grade;
+
     if (grade < 3) {
         card.rating.repetition = 0;
         card.rating.interval = 0;

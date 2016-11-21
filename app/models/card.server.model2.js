@@ -15,7 +15,7 @@ var CardSchema = new mongoose.Schema({
         "durationElapsed": { type: Number, default: -1 },
         "correctAnswered": { type: Boolean, default: false },
         "lastRepetition": { type: Date, default: '' },
-        "nextRepetition": { type: Date, default: '' },
+        "nextRepetition": { type: Date, default: Date.now },
         "grade": { type: Number, default: -1 },
         "interval": { type: Number, default: 0 },
         "repetition": { type: Number, default: 0 },

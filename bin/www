@@ -49,6 +49,9 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 
+// setup some testdata
+require("../test/testData/insert.flashcards.in.db").setupTestData();
+
 
 /**
  * Event listener for HTTP server "error" event.

@@ -60,19 +60,22 @@ describe("test sm2 algorithm", function() {
                     });
                 }
             });
+            
+            
             // insert some data in the database
-            var signin = {
-                url: "http://localhost:" + TEST_PORT + "/api/card",
-                form: {"userName": "test10"}
-            };
-            var fl = [];
-
-            fl = flashcards(); //JSON.parse("[{},{}]");
-            fl.forEach(function (item, index) {
-                var i = cal.calcIntervalEF(item, 3);
-                console.log(item);
-                console.log(index);
-            });
+            
+            // var signin = {
+            //     url: "http://localhost:" + TEST_PORT + "/api/card",
+            //     form: {"userName": "test10"}
+            // };
+            // var fl = [];
+            //
+            // fl = flashcards(); //JSON.parse("[{},{}]");
+            // fl.forEach(function (item, index) {
+            //     var i = cal.calcIntervalEF(item, 3);
+            //     console.log(item);
+            //     console.log(index);
+            // });
             
             
             
