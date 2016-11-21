@@ -15,9 +15,9 @@ router.route('/dailyExercises')
 
 
 router.route('/getFutureCards')
-    .get(dailyExercises.getDeck);
+    .get(dailyExercises.getFuture);
 
 router.route('/postCards')
-    .post(dailyExercises.saveEvaluation); // post is not implemented yet
+    .post(dailyExercises.saveEvaluation);
 
 module.exports = router;

@@ -17,60 +17,74 @@ var cal = require('../sm2/spacedRepetition.server.calculator');
 
 
 exports.getDeck = function (req, res) {
-
-    //var cards = [];
     
-    // // number of cards given back by dailyExercises api
-    // var maxCards = 0;
-    // var minCards = 0;
-    // // Get a random number of cards.
-    // var randomNumber = Math.random(); // [0 .. 1]
-    // var numberOFCards = Math.round(randomNumber * maxCards) + 1;
-    //
-    // for (var index = minCards; index < numberOFCards; index++) {
-    //
-    //     var newCard = new Card2({
-    //
-    //         "category": "Category",
-    //         "question": "question "+index,
-    //         "rating": {
-    //             "nextRepetition": Date.now()
-    //         },
-    //         "answers": [
-    //             {
-    //                 "answer": "Answer "+1,
-    //                 "isCorrect": false
-    //             },
-    //             {
-    //                 "answer": "Answer "+2,
-    //                 "isCorrect": true
-    //             },
-    //             {
-    //                 "answer": "Answer "+3,
-    //                 "isCorrect": false
-    //             },
-    //             {
-    //                 "answer": "Answer "+4,
-    //                 "isCorrect": false
-    //             }
-    //         ]
-    //     }); // end of card
-    //     cards.push(newCard);
-    // }
-
     Cards.find({"user": "test"/*req.session.userName*/}, function (err, userDB) {
 
        if(!err) {
-            var db = userDB[0];
-            res.json({"flashcards": db.flashcards});
-        }
+           var flashcards = userDB[0].flashcards;
+           
+           sortByDate(flashcards);
+           
+           var now = Date.now();
+           var deck = [];
+           flashcards.forEach(function (card) {
+              
+               if(card.rating.nextRepetition <= now) {
+                   deck.push(card);
+               } else {
+                   return;
+               }
+           });
+           res.json({"flashcards": deck});
+        } // End of if(err)
     });
-    
-    
-   
-
-    //res.json({"flashcards": cards});
 }; // End of find all
+
+
+
+exports.getFuture = function (req, res) {
+
+    Cards.find({"user": "test"/*req.session.userName*/}, function (err, userDB) {
+
+        if(!err) {
+            var flashcards = userDB[0].flashcards;
+
+            sortByDate(flashcards);
+
+            var now = flashcards[0].rating.nextRepetition;
+            var deck = [];
+            flashcards.forEach(function (card) {
+
+                if(card.rating.nextRepetition.getFullYear() <= now.getFullYear()) {
+                    if(card.rating.nextRepetition.getDate() <= now.getDate()) {
+                        if (card.rating.nextRepetition.getDay() <= now.getDay()) {
+                            deck.push(card);
+                        } else {
+                            return;
+                        }
+                    } else {
+                        return;
+                    }
+                } else {
+                    return;
+                }
+            }); // End of forEach()
+            res.json({"flashcards": deck});
+        } // End of if(err)
+    });
+}; // End of find all
+
+
+
+
+
+var sortByDate = function(flashcards) {
+
+    return flashcards.sort(function(a, b) {
+        return (new Date(a.rating.nextRepetition)) - (new Date(b.rating.nextRepetition));
+    });
+
+};
 
 
 
@@ -86,19 +100,7 @@ exports.saveEvaluation = function (req, res) {
            res.json(cards); 
         });
         //res.json(editCard(card));
-        
     });
-
-
-    
-
-    // cal.calcIntervalEF(card, grade);
-    //
-    // res.json(editCard(card));
-    //
-
-    //res.json(card); // not implemented yet
-
 }; // End of saveEvaluation (post)
 
 
@@ -115,11 +117,6 @@ var findCard = function (id, callback) {
         }
     }); 
 };
-
-
-
-
-
 
 
 var editCard = function (card, callback) {
@@ -164,16 +161,4 @@ var editCard = function (card, callback) {
         }
     });
     
-};
-
-
-
-
-
-var sortByDate = function(flashcards) {
-
-    return flashcards.sort(function(a, b) {
-        return (new Date(b.rating.nextRepetition)) - (new Date(a.rating.nextRepetition));
-    });
-
 };
