@@ -5,25 +5,15 @@
 /**
  * Module dependencies.
  */
-
-// Bring cloud-env into the app :: 
-// cloud-env provides a vendor-neutral interface for autoconfiguring your server,
-// allowing it to run on a variety of cloud hosting platforms.
-var configCloudEnv = require('cloud-env');
-
 var app = require('../server');
 var debug = require('debug')('ProjectFlashCardServerSeed2:server');
 var http = require('http');
-
+var config = require('../config/config');
 /**
  * Get port from environment and store in Express.
  */
-
-// overwrite default values in configCloudEnv
-var port = configCloudEnv.get('PORT', 3000);
-var ip = configCloudEnv.get('IP','127.0.0.1');
-//var port = configCloudEnv.PORT;
-//var ip = configCloudEnv.IP;
+var port = config.db.port;
+var ip = config.db.ip;
 app.set('port', port);
 app.set('ip', ip);
 
@@ -49,8 +39,9 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 
-// setup some testdata
-require("../test/testData/insert.flashcards.in.db").setupTestData();
+// setup some testdata here .....
+//
+//
 
 
 /**

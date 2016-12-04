@@ -7,11 +7,6 @@ var express = require('express');
 var router = express.Router();
 
 require('../models/user.server.model.js'); // this has to be moved to a config file or something
-
-require('../models/card.server.model2.js'); // this has to be moved to a config file or something
-require('../models/cards.server.model.js'); // this has to be moved to a config file or something
-
-
 var user = require('../controllers/user.server.controller.js');
 
 

@@ -5,19 +5,7 @@
 
 // Bring Mongoose into the app
 var mongoose = require('mongoose');
-
-// removes warning about promises (dont add this line !! gives problems on openshift
-//mongoose.Promise = global.Promise;
-
-// Bring cloud-env into the app :: 
-// cloud-env provides a vendor-neutral interface for autoconfiguring your server,
-// allowing it to run on a variety of cloud hosting platforms.
-var configCloudEnv = require('cloud-env');
-
-// Name of local database
-var localDataBase =  '/flashcard';     //  old data base name ->  '/cs5610';
-// Build the connection string
-var dbURI = configCloudEnv.MONGODB_DB_URL + configCloudEnv.get('APP_NAME', localDataBase);
+var dbURI = require('../../config/config').db.dbURI;
 
 
 // Create the database connection

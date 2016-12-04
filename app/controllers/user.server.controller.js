@@ -6,37 +6,40 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-var Cards = mongoose.model('Cards');
-
-
+// require('./config/passport')(passport);
+//require('../../config/strategy/passport')(passport);
 
 
 exports.signup = function (req, res) {
-    
-    var newUser = new User(req.body);
-    var userName = req.body.userName;
 
-    newUser.save(function (err, createdDocument) {
-        if(err) {
-            res.json(err);
-        } else {
-            //create a place in the database for the user
-            if(createdDocument != null) {
-                var newUserDB = new Cards({"user": userName});
-              
-                newUserDB.save(function (err, db) {
-                    if(err) {
-                        res.json(err);
-                    } else {
-                        console.log("here i AM :: user.server.controller");
-                        req.session.userName = userName;
-                        res.json(createdDocument);
-                    }
-                }); // End of save newUserDB
+    // var newUser = new User(req.body);
+    //
+    // newUser.save(function (err, createdDocument) {
+    //     if(err) {
+    //         res.json(err);
+    //     } else {
+    //         res.json(createdDocument);
+    //     }
+    // });
+
+
+    if (!req.body.userName || !req.body.password) {
+        res.json({success: false, msg: 'Please pass name and password.'});
+    } else {
+        var newUser = new User({
+            userName: req.body.userName,
+            password: req.body.password
+        });
+        // save the user
+        newUser.save(function(err) {
+            if (err) {
+                return res.json({success: false, msg: 'Username already exists.'});
             }
-        }
-    }); // End of Save newUSer
+            res.json({success: true, msg: 'Successful created new user.'});
+        });
+    }
 }; // End of signup
+
 
 
 exports.signin = function (req, res) {

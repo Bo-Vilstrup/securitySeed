@@ -9,11 +9,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+var passport = require('passport');
+
+
 
 var user = require('./app/routes/user.server.route.js');
-var dailyExercises = require('./app/routes/dailyExercises.server.route');
-var card = require('./app/routes/card.server.route');
-var deck = require('./app/routes/deck.server.route');
+var dummy = require('./app/routes/dummy.server.route');
 var routes = require('./app/routes/index');
 
 var app = express();
@@ -30,47 +31,54 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Use the passport package in our application
+//app.use(passport.initialize());
+
+var passport = require("passport");
+//var passportConfig = require("./config/passport");
+var passportConfig = require("./config/strategy/passport");
+passportConfig(passport);
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-  //cookie: { secure: true }
-}));
-
-app.use(function(req, res, next) {
-
-  var sessionUserName = req.session.userName;
-  var userName = req.body.userName;
-
-  // delete these 3 lines in production when phone have implemented log in and out
-  if( req.url  === "/api/dailyExercises") return next();
-  if( req.url === "/api/getFutureCards") return next();
-  if( req.url  === "/api/postCards") return next();
-
-  if(sessionUserName) return next();
-  if(userName) {
-    // everything will be handled in user.server.route
-    // either in login or signin
-    // req.session.userName will be set to userName;
-    next();
-  } else {
-    res.status(401).json({"msg" : "you need to signup or login"});
-  }
-});
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+//   //cookie: { secure: true }
+// }));
+//
+// app.use(function(req, res, next) {
+//
+//   var sessionUserName = req.session.userName;
+//   var userName = req.body.userName;
+//
+//   // delete these 3 lines in production when phone have implemented log in and out
+//   if( req.url  === "/api/dailyExercises") return next();
+//   if( req.url === "/api/getFutureCards") return next();
+//   if( req.url  === "/api/postCards") return next();
+//
+//   if(sessionUserName) return next();
+//   if(userName) {
+//     // everything will be handled in user.server.route
+//     // either in login or signin
+//     // req.session.userName will be set to userName;
+//     next();
+//   } else {
+//     res.status(401).json({"msg" : "you need to signup or login"});
+//   }
+// });
 
 
 
 
 
 app.use('/api', user);
-app.use('/api', dailyExercises);
-app.use('/api', card);
-app.use('/api', deck);
+app.use('/api', dummy);
 app.use('/', routes);
 
 
