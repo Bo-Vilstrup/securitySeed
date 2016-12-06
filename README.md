@@ -1,7 +1,50 @@
-# ProjectFlashCardServerSeed
+# The MEAN Seed
 
-ProjectFlashCard Server Seed is my first attempt to make a useful seed to project flashcard.
-The basic part of the seed is taken from the express-generator in webStorm.
+The MEAN Seed provides you with a full stack development toolkit.
+MEAN is a collection of JavaScript-based technologies:
+ — MongoDB
+ — Express.js
+ — AngularJS
+ — Node.js
+These technologies is used to develop web applications. From the client and server sides to databases.
+
+
+## How to run the application
+
+Clone the program from github
+> git clone <url>
+
+Then install dependencies
+> npm install
+
+Now you can run the program
+> npm start
+
+
+You can verify that the application is runne by pointing you browser to this location:
+http://127.0.0.1:3000/
+
+or
+
+http://localhost:3000/
+
+
+Setting up ports IP addresses and database
+This seed uses the 'cloud-env' package, to ease the setup of Port, IP and databse adresses.
+cloud-env provides a vendor-neutral interface for autoconfiguring your server, allowing it to run on a variety of cloud hosting platforms.
+It works by checking the system environment (process.env) for known configuration strings (published by OpenShift, Heroku Modulus), normalizing the results into a well-defined list.
+
+locate and open the file:
+> config/config.js
+
+You can change the local port number and ip addess here:
+> var port = configCloudEnv.get('PORT', 3000);
+> var ip = configCloudEnv.get('IP','127.0.0.1');
+
+And you can change the name of the local database here:
+> var localDataBase =  '/security_seed_1';
+
+
 
 ## I have added the following things to the express-generator seed:
 
