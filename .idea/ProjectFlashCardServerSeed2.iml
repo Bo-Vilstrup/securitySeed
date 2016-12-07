@@ -8,11 +8,6 @@
     <orderEntry type="library" name="express-route-fs-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="nodeserver node_modules" level="project" />
     <orderEntry type="library" name="FlashCardServer node_modules" level="project" />
-    <orderEntry type="library" name="node-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="express-session-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="morgan-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="express-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="chai-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="mocha-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="securitySeed node_modules" level="project" />
   </component>
 </module>

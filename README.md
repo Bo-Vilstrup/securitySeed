@@ -10,6 +10,11 @@ These technologies is used to develop web applications. From the client and serv
 
 
 ## How to run the application
+If you have not installed git, npm and note.js, then install them:
+> sudo apt-get update
+> sudo apt-get install git
+> sudo apt-get install npm
+> sudo apt-get install nodejs
 
 Clone the program from github
 > git clone <url>
