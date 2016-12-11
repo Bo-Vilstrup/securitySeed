@@ -1,4 +1,10 @@
-# Created by https://www.gitignore.io/api/node,webstorm,macos,linux,windows
+# Created by https://www.gitignore.io/api/node,webstorm,macos,linux,windows,bower
+### Bower ###
+public/lib
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
 
 ### Node ###
 # Logs
