@@ -18,6 +18,6 @@ angular.module('app.homeModule', ['ngRoute'])
     .controller('homeController', function ($http, $scope) {
 
 
-        alert("hey home");
+       
 
     }); // End of Controller
