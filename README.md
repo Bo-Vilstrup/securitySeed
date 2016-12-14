@@ -40,7 +40,7 @@ locate and open the file:
 > config/config.js
 
 You can change the local port number and ip addess here:
-```
+```javascript
     var port = configCloudEnv.get('PORT', 3000);
     var ip = configCloudEnv.get('IP','127.0.0.1');
 ```
@@ -103,4 +103,29 @@ And make a get request to this address
 http://localhost:3000/api/hellos
 
 ![Alt text](HttpRequester_authorization.png "picture of HttpRequester")
+
+
+#### Configuration of web-token for authentication
+
+locate and open the file:
+> config/config.js
+
+locate the code snippet:
+```javascript
+jwtConfig : {
+        secret: "ChangMeToARealSecretOurIWillBeHacked",
+        tokenExpirationTime : 60*20, //seconds
+        audience: "yoursite.net",
+        issuer: "yourcompany@somewhere.com"
+    }
+```
+
+You should change the values of the jwtConfig object. for example change
+the secret and the tokenExpirationTime.
+you can read more about the Payload(Claims) on the website below: 
+
+
+https://www.toptal.com/web/cookie-free-authentication-with-json-web-tokens-an-example-in-laravel-and-angularjs
+
+
 
