@@ -13,6 +13,7 @@ var passport = require('passport');
 
 
 
+var authenticate = require("./app/routes/authenticate.server.route");
 var user = require('./app/routes/user.server.route.js');
 var dummy = require('./app/routes/dummy.server.route');
 var routes = require('./app/routes/index');
@@ -85,12 +86,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-
-
-app.use('/', user);
+app.use('/', authenticate);
+app.use('/api', user);
 app.use('/api', dummy);
 app.use('/', routes);
-
 
 
 

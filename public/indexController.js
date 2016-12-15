@@ -42,18 +42,22 @@ angular.module('app.indexModule' ,['ngRoute', 'ngStorage'])
 
         // var currentUser = getUserProfileFromToken();
         $scope.isAuthenticated = false;
+        $scope.indexController = {};
+        $scope.indexController.username = "";
+        $scope.indexController.userName = "";
+        $scope.indexController.password = "";
 
-        $scope.login = function () {
+            $scope.login = function () {
             $http({
                 method: 'post',
                 url: '/signin',
                 data: {
-                    "userName": $scope.userName,
-                    "password": $scope.password
+                    "userName": $scope.indexController.userName,
+                    "password": $scope.indexController.password
                 }
             }).then(function successCallback(response) {
                 $localStorage.token = response.data.token;
-                $scope.username = getUserProfileFromToken().sub;
+                $scope.indexController.username = getUserProfileFromToken().sub;
                 $scope.isAuthenticated = true;
 
             }, function errorCallback(response) {
@@ -64,7 +68,7 @@ angular.module('app.indexModule' ,['ngRoute', 'ngStorage'])
         $scope.logout = function () {
             delete $localStorage.token;
             //changeUser({});
-            $scope.username = "";
+            $scope.indexController.username = "";
             $scope.isAuthenticated = false;
             $location.path("/");
         }; // End of logout
@@ -76,7 +80,7 @@ angular.module('app.indexModule' ,['ngRoute', 'ngStorage'])
             if (token) {
                 $scope.isAuthenticated = true;
                 var userProfile = getUserProfileFromToken();
-                $scope.username = userProfile.sub;
+                $scope.indexController.username = userProfile.sub;
             }
         }(/*this executes the init() function*/);
 

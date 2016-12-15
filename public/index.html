@@ -87,16 +87,16 @@
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" ng-show="!isAuthenticated" ng-submit="login()">
                 <div class="form-group">
-                    <input type="text" placeholder="User Name" class="form-control" ng-model="userName">
+                    <input type="text" placeholder="User Name" class="form-control" ng-model="indexController.userName">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control" ng-model="password">
+                    <input type="password" placeholder="Password" class="form-control" ng-model="indexController.password">
                 </div>
                 <button type="submit" class="btn btn-success">Sign in</button>
 
             </form>
             <div class="navbar-right" ng-show="isAuthenticated">
-                <p class="navbar-text">Logged on as: {{username}}</p>
+                <p class="navbar-text">Logged on as: {{indexController.username}}</p>
                 <button type="submit" class="btn btn-success navbar-btn"  ng-click="logout()">Logout</button>
             </div>
         </div><!--/.navbar-collapse -->

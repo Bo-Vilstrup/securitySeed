@@ -21,21 +21,34 @@ angular.module('app.restrictedModule', ['ngRoute'])
 
         var req = {
             method: 'GET',
-            url: '/api/hellos',
-            headers: {'Content-Type': 'application/json'},
+            url: '/api/users',
+            headers: {'Content-Type': 'application/json'}
         };
 
         $http(req).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
+           $scope.users = response.data;
             
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
 
-        });
+        }); // End of get()
 
+        $scope.delete = function (index) {
 
+            var req = {
+                method: 'DELETE',
+                url: '/api/user/'+$scope.users[index]._id,
+                headers: {'Content-Type': 'application/json'}
+            };
+            
+            $http(req).then(function successCallback(response) {
+                $scope.users.splice( index, 1 );
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }; // End of Delete()
 
 
     }); // End of Controller
