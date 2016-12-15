@@ -100,7 +100,7 @@ If using HttpRequester then do the following:
 * Copy the token "JWT eyJ ..." into the text feild "Value:" and press Add
 
 And make a get request to this address
-http://localhost:3000/api/hellos
+http://localhost:3000/api/users
 
 ![Alt text](HttpRequester_authorization.png "picture of HttpRequester")
 
@@ -128,4 +128,27 @@ you can read more about the Payload(Claims) on the website below:
 https://www.toptal.com/web/cookie-free-authentication-with-json-web-tokens-an-example-in-laravel-and-angularjs
 
 
+#### How to secure a part of a web-site
+locate and open the file:
+> server.js
+
+locate the two pieces of code:
+
+```
+var authenticate = require("./app/routes/authenticate.server.route");
+var user = require('./app/routes/user.server.route.js');
+var routes = require('./app/routes/index');
+```
+First: we have to import the modules (see code snippet above)
+Then: we registrer the modules as middleware (see code snippet below)
+
+```javascript
+    app.use('/', authenticate);
+    app.use('/api', user);
+    app.use('/', routes);
+```
+
+note, when a module is prefixed with the URI path '/api' then this 
+module is protected and any attempt to go to any path inside this/these 
+modules needs authentication.
 
