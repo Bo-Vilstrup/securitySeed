@@ -152,3 +152,77 @@ note, when a module is prefixed with the URI path '/api' then this
 module is protected and any attempt to go to any path inside this/these 
 modules needs authentication.
 
+
+
+
+## Best practice
+Follow the link below to read more about best practice to gain performance
+> https://expressjs.com/en/advanced/best-practice-performance.html
+
+Follow the link below to read more about best practice of getting secure
+>https://expressjs.com/en/advanced/best-practice-security.html
+
+#### More on best practice 
+
+Ensure your dependencies are secure
+
+Using npm to manage your application’s dependencies is powerful and 
+convenient. But the packages that you use may contain critical security 
+vulnerabilities that could also affect your application. The security of 
+your app is only as strong as the “weakest link” in your dependencies.
+
+Use either or both of the following two tools to help ensure the security 
+of third-party packages that you use: nsp and requireSafe. These two tools 
+do largely the same thing.
+
+nsp is a command-line tool that checks the Node Security Project 
+vulnerability database to determine if your application uses packages 
+with known vulnerabilities. Install it as follows:
+
+> npm install nsp -g
+
+Use this command to submit the npm-shrinkwrap.json / package.json files for validation to nodesecurity.io:
+
+> nsp check
+
+Here’s how to use requireSafe to audit your Node modules:
+
+> npm install -g requiresafe
+> cd your-app
+> requiresafe check
+
+
+#### More on securety
+
+
+
+## Deploy
+
+Go to Openshift and create a new gear with:
+> node
+> mongoDB
+
+In this example  we will let OPENSHIFT create the
+infrastructure for a Node application and then commit and push our code 
+to the repository provided by OPENSHIFT.
+When the application has been created, OPENSHIFT provides you with a URL
+which you can use to clone the "start code" for the demo-page OPENSHIFT 
+has created (we will just delete this code).
+
+> git clone ssh://585320382d527143f4000030@securemeanseed-vilstrup.rhcloud.com/~/git/securemeanseed.git/
+> cd securemeanseed/
+
+Delete all files except (see below)
+> .git
+> .openshift
+
+Open a terminal somewhere on your system and copy/paste the clone information
+given by OPENSHIFT into the terminal and execute the statements.
+Open the folder and delete all files related to the sample node-project created by
+OPENSHIFT as sketched to the right.
+Now copy ALL files/folders from your express project into this folder and do:
+
+> Git add .
+> Git commit -m "initial commit"
+> Git push
+
